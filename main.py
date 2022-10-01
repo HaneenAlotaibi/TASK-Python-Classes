@@ -78,38 +78,3 @@ class Customer(Person):
    def request_icecream(self,endor, number_of_icecreams): 
       if self._is_in_range(vendor) and self._have_enough_money(vendor, number_of_icecreams):
             vendor.sellTo(self, number_of_icecreams)
-
-vendor_aziz = Vendor(
-    "Asis", 10, 10
-)  # create a new vendor named Asis at location 10 with a money value of 10
-nearby_customer = Customer(
-    "MishMish", 11, 10
-)  # create a new customer named MishMish at location 11 with a money value of 10
-distant_customer = Customer(
-    "Hamsa", 1000, 1000
-)  # create a new customer named Hamsa at location 1000 with a money value of 10
-broke_customer = Customer(
-    "Maskeen", 12, 0
-)  # create a new customer named Maskeen at location 12 with 0 money
-
-
-nearby_customer.request_icecream(vendor_aziz, 10)  # ask to buy 10 ice creams from Asis
-# money was transferred from MishMish to Asis
-print(nearby_customer.wallet.money)  # 0 left
-print(vendor_aziz.wallet.money)  # 10
-# Asis moved to MishMish's location
-print(vendor_aziz.location)  # 11
-
-distant_customer.request_icecream(vendor_aziz, 10)  # ask to buy 10 ice creams from Asis
-# no money was transferred because the request failed - Hamsa is too far away
-print(distant_customer.wallet.money)  # 10 left
-print(vendor_aziz.wallet.money)  # still only 10
-# Asis didn't move
-print(vendor_aziz.location)  # 11
-
-broke_customer.request_icecream(vendor_aziz, 1)  # ask to buy 1 ice creams from Asis
-# no money was transferred because the request failed - Maskeen doesn't have enough money to buy even one ice cream :(
-print(broke_customer.wallet.money)  # 0
-print(vendor_aziz.wallet.money)  # still only 10
-# Asis didn't move
-print(vendor_aziz.location)  # { x: 11, y: 11 }
